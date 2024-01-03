@@ -22,12 +22,13 @@ static object SomeMethod()
     instanceCapacityDict.Add("oai02", 20);
     instanceCapacityDict.Add("oai03", 10);
     instanceCapacityDict.Add("oai04", 40);
-    
-    var total = instanceCapacityDict.Sum(x => x.Value):
+
+    var total = instanceCapacityDict.Sum(x => x.Value);
     var random = new Random().Next(0, total);
     IDictionary<string, int> instanceDistributionDict = new Dictionary<string, int>();
     int cumul = 0;
-    foreach (var i in instanceCapacityDict) {
+    foreach (var i in instanceCapacityDict)
+    {
         cumul += i.Value;
         instanceDistributionDict.Add(i.Key, cumul);
     }
