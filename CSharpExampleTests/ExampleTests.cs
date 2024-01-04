@@ -36,4 +36,25 @@ public class ExampleTests
             new("i2", 100),
         });
     }
+
+    [Test]
+    public void TestCorrectness()
+    {
+        var config = new List<KeyValuePair<string, int>>
+        {
+            new("i1", 50),
+            new("i2", 50),
+            new("i3", 100),
+        };
+        var results = new Dictionary<string, int>();
+        for (int i = 0; i < 1000; i++)
+        {
+            var result = Example.Run(config);
+            results[result] = (results.TryGetValue(result, out var oldValue) ? oldValue : 0) + 1;
+        }
+
+        Assert.That(results["i1"] / 1000.0, Is.EqualTo(0.25).Within(0.1));
+        Assert.That(results["i2"] / 1000.0, Is.EqualTo(0.25).Within(0.1));
+        Assert.That(results["i3"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
+    }
 }

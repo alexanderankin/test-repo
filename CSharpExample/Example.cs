@@ -2,7 +2,7 @@ namespace CSharpExample;
 
 public class Example
 {
-    public static void Run()
+    public static string Run()
     {
         // data setup
         var instances = new List<KeyValuePair<string, int>>();
@@ -12,10 +12,10 @@ public class Example
         instances.Add(new KeyValuePair<string, int>("i2", 20));
         instances.Add(new KeyValuePair<string, int>("i3", 20));
 
-        Run(instances: instances);
+        return Run(instances: instances);
     }
 
-    public static void Run(List<KeyValuePair<string, int>> instances)
+    public static string Run(List<KeyValuePair<string, int>> instances)
     {
         // selecting a backend
         string backend = null;
@@ -40,5 +40,6 @@ public class Example
             backend = instances[^1].Key; // last
 
         Console.WriteLine($"random {random} gave backend {backend}");
+        return backend;
     }
 }
