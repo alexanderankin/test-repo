@@ -12,10 +12,19 @@ public class Example
         instances.Add(new KeyValuePair<string, int>("i2", 20));
         instances.Add(new KeyValuePair<string, int>("i3", 20));
 
-        return Run(instances: instances);
+        return Run(
+            clientInstances: new Dictionary<string, List<KeyValuePair<string, int>>> { { "default", instances } }
+        );
     }
 
-    public static string Run(string config)
+    public static string Run(string config, string client = "default")
+    {
+        var parsed = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, List<KeyValuePair<string, int>>>>(config);
+        if (parsed == null) throw new Exception("unable to parse config");
+        return Run(clientInstances: parsed, client: client);
+    }
+
+    public static string RunDefault(string config)
     {
         /*
         var parsed = Newtonsoft.Json.Linq.JArray.Parse(config);
@@ -32,11 +41,19 @@ public class Example
 
         var parsed = Newtonsoft.Json.JsonConvert.DeserializeObject<List<KeyValuePair<string, int>>>(config);
         if (parsed == null) throw new Exception("unable to parse config");
-        return Run(instances: parsed);
+        return Run(clientInstances: new Dictionary<string, List<KeyValuePair<string, int>>> { { "default", parsed } });
     }
 
-    public static string Run(List<KeyValuePair<string, int>> instances)
+    public static string Run(
+        Dictionary<string, List<KeyValuePair<string, int>>> clientInstances,
+        string client = "default"
+    )
     {
+        // error handling
+        // https://stackoverflow.com/a/77662227
+        if (!clientInstances.TryGetValue(client, out var instances))
+            throw new Exception("412:ERR_NO_CLIENT");
+
         // selecting a backend
         string backend = null;
         var total = instances.Sum(i => i.Value);
