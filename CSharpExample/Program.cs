@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-Console.WriteLine("Hello, World!");
+static void Program()
 {
     IDictionary<string, int> a = new Dictionary<string, int>();
 
