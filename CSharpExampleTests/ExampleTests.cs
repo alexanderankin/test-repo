@@ -82,7 +82,8 @@ public class ExampleTests
                          {"key": "i1", "value": 50},
                          {"key": "i2", "value": 30},
                          {"key": "i3", "value": 10},
-                         {"key": "i4", "value": 10}
+                         {"key": "i4", "value": 10},
+                         {"key": "i5", "value": 100}
                        ]
                      }
                      """;
@@ -107,9 +108,10 @@ public class ExampleTests
         Assert.That(results["client1"]["i3"] / 1000.0, Is.EqualTo(0.3).Within(0.1));
         Assert.That(results["client1"]["i4"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
 
-        Assert.That(results["client2"]["i1"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
-        Assert.That(results["client2"]["i2"] / 1000.0, Is.EqualTo(0.3).Within(0.1));
-        Assert.That(results["client2"]["i3"] / 1000.0, Is.EqualTo(0.1).Within(0.1));
-        Assert.That(results["client2"]["i4"] / 1000.0, Is.EqualTo(0.1).Within(0.1));
+        Assert.That(results["client2"]["i1"] / 1000.0, Is.EqualTo(0.5 / 2).Within(0.1));
+        Assert.That(results["client2"]["i2"] / 1000.0, Is.EqualTo(0.3 / 2).Within(0.1));
+        Assert.That(results["client2"]["i3"] / 1000.0, Is.EqualTo(0.1 / 2).Within(0.1));
+        Assert.That(results["client2"]["i4"] / 1000.0, Is.EqualTo(0.1 / 2).Within(0.1));
+        Assert.That(results["client2"]["i5"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
     }
 }
