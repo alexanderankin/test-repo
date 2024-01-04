@@ -49,7 +49,12 @@ public class ExampleTests
         var results = new Dictionary<string, int>();
         for (int i = 0; i < 1000; i++)
         {
-            var result = Example.Run(config);
+            var result = Example.Run(
+                "[" +
+                "{\"key\":\"i1\",\"value\": 50}," +
+                "{\"key\":\"i2\",\"value\": 50}," +
+                "{\"key\":\"i3\",\"value\": 100}" +
+                "]");
             results[result] = (results.TryGetValue(result, out var oldValue) ? oldValue : 0) + 1;
         }
 

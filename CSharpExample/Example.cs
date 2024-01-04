@@ -15,6 +15,26 @@ public class Example
         return Run(instances: instances);
     }
 
+    public static string Run(string config)
+    {
+        /*
+        var parsed = Newtonsoft.Json.Linq.JArray.Parse(config);
+        var instances = new List<KeyValuePair<string, int>>();
+        foreach (var token in parsed)
+        {
+            instances.Add(new KeyValuePair<string, int>(
+                token.Value<string>("instance"),
+                token.Value<int>("weight")
+            ));
+        }
+        return Run(instances: instances);
+        */
+
+        var parsed = Newtonsoft.Json.JsonConvert.DeserializeObject<List<KeyValuePair<string, int>>>(config);
+        if (parsed == null) throw new Exception("unable to parse config");
+        return Run(instances: parsed);
+    }
+
     public static string Run(List<KeyValuePair<string, int>> instances)
     {
         // selecting a backend
