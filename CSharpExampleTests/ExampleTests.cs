@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace CSharpExampleTests;
 
 using CSharpExample;
@@ -14,12 +16,24 @@ public class ExampleTests
     }
 
     [Test]
+    [SuppressMessage("ReSharper", "RedundantEmptyObjectCreationArgumentList")]
+    [SuppressMessage("ReSharper", "ArrangeObjectCreationWhenTypeEvident")]
     public void TestWithInstances()
     {
         Example.Run(new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>("i1", 100),
             new KeyValuePair<string, int>("i2", 100),
+        });
+    }
+
+    [Test]
+    public void TestWithInstances_SyntaxSugarSimplification()
+    {
+        Example.Run(new List<KeyValuePair<string, int>>
+        {
+            new("i1", 100),
+            new("i2", 100),
         });
     }
 }
