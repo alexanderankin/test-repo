@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Collections.Immutable;
 using Newtonsoft.Json.Linq;
 
 static void Program()
@@ -66,6 +67,8 @@ foreach (var jObject in new List<JObject> { jObjectFromObject, jObjectFromString
     // Console.WriteLine(item["outer.1"]["outer-2-DNE"]?["inner"]);
 
     Console.WriteLine("works: " + jObject.SelectToken("$.['outer.1'].['outer-2'].['inner']")?.ToString());
-    Console.WriteLine("works: " + jObject.Value<JObject>("outer.1")?.Value<JObject>("outer-2")?.GetValue("inner")?.ToString());
-    Console.WriteLine("not working: " + jObject.Value<JObject>("outer.1")?.Value<JObject>("outer.DNE")?.GetValue("inner")?.ToString());
+    Console.WriteLine("works: " +
+                      jObject.Value<JObject>("outer.1")?.Value<JObject>("outer-2")?.GetValue("inner")?.ToString());
+    Console.WriteLine("not working: " +
+                      jObject.Value<JObject>("outer.1")?.Value<JObject>("outer.DNE")?.GetValue("inner")?.ToString());
 }
