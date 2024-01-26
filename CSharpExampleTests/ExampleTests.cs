@@ -65,6 +65,7 @@ public class ExampleTests
         Assert.That(results["i1"] / 1000.0, Is.EqualTo(0.25).Within(0.1));
         Assert.That(results["i2"] / 1000.0, Is.EqualTo(0.25).Within(0.1));
         Assert.That(results["i3"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
+        Assert.That(results.Values.Sum(), Is.EqualTo(1000));
     }
 
     [Test]
@@ -107,11 +108,13 @@ public class ExampleTests
         Assert.That(results["client1"]["i2"] / 1000.0, Is.EqualTo(0.1).Within(0.1));
         Assert.That(results["client1"]["i3"] / 1000.0, Is.EqualTo(0.3).Within(0.1));
         Assert.That(results["client1"]["i4"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
+        Assert.That(results["client1"].Values.Sum(), Is.EqualTo(1000));
 
         Assert.That(results["client2"]["i1"] / 1000.0, Is.EqualTo(0.5 / 2).Within(0.1));
         Assert.That(results["client2"]["i2"] / 1000.0, Is.EqualTo(0.3 / 2).Within(0.1));
         Assert.That(results["client2"]["i3"] / 1000.0, Is.EqualTo(0.1 / 2).Within(0.1));
         Assert.That(results["client2"]["i4"] / 1000.0, Is.EqualTo(0.1 / 2).Within(0.1));
         Assert.That(results["client2"]["i5"] / 1000.0, Is.EqualTo(0.5).Within(0.1));
+        Assert.That(results["client2"].Values.Sum(), Is.EqualTo(1000));
     }
 }
